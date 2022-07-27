@@ -2,12 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser');
+
+const dns = require('dns')
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 
+app.use(bodyParser.urlencoded({extended: false}));
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function(req, res) {
@@ -17,6 +21,24 @@ app.get('/', function(req, res) {
 // Your first API endpoint
 app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
+});
+
+app.get('/api/shorturl', function(req, res) {
+
+const {url} = req.body;
+
+dns.lookup(url, (error, addresses, family) => {
+  
+  if(error){
+    return  res.json({ 
+      
+      error: 'invalid URL' 
+    
+    });
+  }
+}); 
+
+ 
 });
 
 app.listen(port, function() {
