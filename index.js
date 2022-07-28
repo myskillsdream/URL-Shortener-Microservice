@@ -25,7 +25,9 @@ app.get('/api/hello', function(req, res) {
 
 app.post('/api/shorturl', (req, res) => {
 
-      const {url} = req.body;
+      let {url} = req.body;
+
+      url = url.replace(/^https?:\/\//, " ");
 
       dns.lookup(url, (error, addresses, family) => {
 
