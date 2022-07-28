@@ -27,13 +27,12 @@ app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      url = url.replace(/^https?:\/\//, "");
+      url = url.replace(/^https?:\/\//, '');
 
       dns.lookup(url,(err, address, family) => {
 
         console.log("err", err);
         console.log("address", address);
-        console.log("family", family);
 
         if(err){
           return  res.json({ 
