@@ -28,6 +28,10 @@ app.post('/api/shorturl', (req, res) => {
       const {url} = req.body;
 
       dns.lookup(url, (error, addresses, family) => {
+
+        console.log("error", error)
+        console.log("addresses", addresses)
+        console.log("family", family)
   
         if(error){
           return  res.json({ 
