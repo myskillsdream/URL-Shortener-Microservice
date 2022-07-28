@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/public', express.static(`${process.cwd()}/public`));
 
-app.get('/', function(req, res) {
+app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
@@ -23,19 +23,19 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-app.post('/api/shorturl', function(req, res) {
+app.post('/api/shorturl', (req, res) => {
 
-const {url} = req.body;
+      const {url} = req.body;
 
-dns.lookup(url, (error, addresses, family) => {
+      dns.lookup(url, (error, addresses, family) => {
   
-  if(error){
-    return  res.json({ 
-      
-      error: 'invalid URL' 
-    
-    });
-  }
+        if(error){
+          return  res.json({ 
+            
+            error: 'invalid URL' 
+          
+          });
+        }
 }); 
 
  
