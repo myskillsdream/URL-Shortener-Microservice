@@ -27,7 +27,7 @@ app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      url = url.replace(/^https?:\/\//, " ");
+      url = url.replace(/^https?:\/\//, "");
 
       dns.lookup(url, (error, addresses, family) => {
 
