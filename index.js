@@ -29,13 +29,13 @@ app.post('/api/shorturl', (req, res) => {
 
       url = url.replace(/^https?:\/\//, "");
 
-      dns.lookup(url, (err, addresses, family) => {
+      dns.lookup(url,(err, address, family) => {
 
         console.log("err", err)
-        console.log("addresses", addresses)
+        console.log("address", address)
         console.log("family", family)
-  
-        if(error){
+
+        if(err){
           return  res.json({ 
             
             error: 'invalid URL' 
