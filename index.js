@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 
-const dns = require('dns')
+const dns = require('dns');
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -29,9 +29,9 @@ app.post('/api/shorturl', (req, res) => {
 
       url = url.replace(/^https?:\/\//, "");
 
-      dns.lookup(url, (error, addresses, family) => {
+      dns.lookup(url, (err, addresses, family) => {
 
-        console.log("error", error)
+        console.log("err", err)
         console.log("addresses", addresses)
         console.log("family", family)
   
@@ -43,8 +43,6 @@ app.post('/api/shorturl', (req, res) => {
           });
         }
 }); 
-
- 
 });
 
 app.listen(port, function() {
