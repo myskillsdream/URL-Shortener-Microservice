@@ -43,8 +43,8 @@ app.post('/api/shorturl', (req, res) => {
         }else{
           id++;
           const link = {
-            inputedUrl: url,
-            shortenedUrl:`${id}`
+            original_url: url,
+            short_url: `${id}`
           };
 
           links.push(link);
@@ -57,7 +57,7 @@ app.post('/api/shorturl', (req, res) => {
 }); 
 });
 
-app.post('/api/shorturl:id', (req, res) => {
+app.post('/api/shorturl/:id', (req, res) => {
 
   let { id } = req.params;
 
@@ -66,7 +66,7 @@ app.post('/api/shorturl:id', (req, res) => {
   const link = links.find(lnk => lnk.shortenedUrl === id);
 
     if(link){
-      return  res.redirect(link.inputedUrl);
+      return  res.redirect(link.original_url);
     }else{
 
       return res.json({
