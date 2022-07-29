@@ -24,7 +24,7 @@ app.get('/api/hello', function(req, res) {
 });
 
   const links = [];
-  const id = 0;
+  let id = 0;
 
 app.post('/api/shorturl', (req, res) => {
 
