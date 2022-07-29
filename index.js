@@ -61,7 +61,7 @@ app.post('/api/shorturl:id', (req, res) => {
 
   let { id } = req.params;
 
-  const link = links.find(l => l.shortenedUrl === id);
+  const link = links.find(link => link.id === id);
 
     if(link){
       return  res.redirect(link.inputedUrl);
