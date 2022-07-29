@@ -23,17 +23,16 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+  const links = [];
+  const id = 0;
+
 app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      url = url.replace(/^https?:\/\//, '');
+      const removeHTTPSurl = url.replace(/^https?:\/\//, '');
 
-      dns.lookup(url,(err, address, family) => {
-
-        console.log("err", err);
-        console.log("address", address);
-        console.log("family", family);
+      dns.lookup(removeHTTPSurl,(err) => {
 
         if(err){
           return  res.json({ 
@@ -41,9 +40,42 @@ app.post('/api/shorturl', (req, res) => {
             error: 'invalid URL' 
           
           });
+        }else{
+          id++;
+          const link = {
+            inputedUrl: url,
+            shortenedUrl: id
+          };
+
+          links.push(link);
+          console.log(links);
+
+          return res.json(link);
+
+
         }
 }); 
 });
+
+app.post('/api/shorturl:id', (req, res) => {
+
+  let { id } = req.query;
+
+  const link = links.find(l => l.shortenedUrl === id);
+
+    if(link){
+      return  res.redirect(link.inputedUrl);
+    }else{
+      
+
+      return res.json({
+        error: "no shortened url"
+      });
+
+
+    }
+}); 
+
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
