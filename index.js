@@ -44,7 +44,7 @@ app.post('/api/shorturl', (req, res) => {
           id++;
           const link = {
             inputedUrl: url,
-            shortenedUrl: id
+            shortenedUrl:`${id}`
           };
 
           links.push(link);
