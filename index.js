@@ -59,7 +59,7 @@ app.post('/api/shorturl', (req, res) => {
 
 app.post('/api/shorturl:id', (req, res) => {
 
-  let { id } = req.query;
+  let { id } = req.params;
 
   const link = links.find(l => l.shortenedUrl === id);
 
