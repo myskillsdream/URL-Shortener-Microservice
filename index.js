@@ -30,9 +30,9 @@ app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      const removeHTTPSurl = url.replace(/^https?:\/\//, '');
+      const host = url.replace(/^https?:\/\//, '');
 
-      dns.lookup(removeHTTPSurl,(err) => {
+      dns.lookup(host, (err) => {
 
         if(err){
           return  res.json({ 
@@ -47,10 +47,9 @@ app.post('/api/shorturl', (req, res) => {
             short_url: id
           };
 
-          links.push(link);
-          console.log(links);
+            links.push(link);
 
-          return res.json(link);
+            return res.json(link);
 
 
         }
