@@ -44,7 +44,7 @@ app.post('/api/shorturl', (req, res) => {
           id++;
           const link = {
             original_url: url,
-            short_url: `${id}`
+            short_url: id
           };
 
           links.push(link);
@@ -61,7 +61,7 @@ app.get('/api/shorturl/:id', (req, res) => {
 
   const { id } = req.params;
 
-  const link = links.find(lnk => lnk.short_url === id);
+  const link = links.find(lnk => `${lnk.short_url}` === id);
 
     if(link){
       return  res.redirect(link.original_url);
