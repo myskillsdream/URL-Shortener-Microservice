@@ -57,7 +57,7 @@ app.post('/api/shorturl', (req, res) => {
 }); 
 });
 
-app.post('/api/shorturl/:id', (req, res) => {
+app.get('/api/shorturl/:id', (req, res) => {
 
   const { id } = req.params;
 
