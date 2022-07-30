@@ -5,7 +5,6 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const dns = require('dns');
-const URL = require('url');
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -31,15 +30,9 @@ app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      const urlObject = new URL(url);
+      const noHTTPSurl = url.replace(/^https?:\/\//, '');
 
-      const hostName = urlObject.hostname;
-
-      // const noHTTPSurl = url.replace(/^https?:\/\//, '');
-
-      let host = hostName.replace(/^https?:\/\//, '');
-
-      dns.lookup(host, (err) => {
+      dns.lookup(noHTTPSurl, (err) => {
 
         if(err){
           return  res.json({ 
