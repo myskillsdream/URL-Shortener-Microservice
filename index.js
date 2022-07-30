@@ -19,14 +19,14 @@ app.get('/', function(req, res){
 });
 
 // Your first API endpoint
-app.get('/api/hello', function(req, res) {
-  res.json({ greeting: 'hello API' });
-});
+// app.get('/api/hello', function(req, res) {
+//   res.json({ greeting: 'hello API' });
+// });
 
   const links = [];
   let id = 0;
 
-app.post('/api/shorturl', (req, res) => {
+app.post('/api/shorturl/new', (req, res) => {
 
       let {url} = req.body;
 
