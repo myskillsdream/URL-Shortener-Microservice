@@ -49,14 +49,7 @@ app.post('/api/shorturl', (req, res) => {
 
             links.push(link);
 
-            // return res.json({
-            //   original_url: url,
-            //   short_url: id
-            // });
-
-            return link
-
-            
+            return res.json(link);
 
         }
 }); 
