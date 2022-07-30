@@ -19,20 +19,20 @@ app.get('/', function(req, res){
 });
 
 // Your first API endpoint
-app.get('/api/hello', function(req, res) {
-  res.json({ greeting: 'hello API' });
-});
+// app.get('/api/hello', function(req, res) {
+//   res.json({ greeting: 'hello API' });
+// });
 
   const links = [];
-  let short_url = 0;
+  let id = 0;
 
 app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      const noHTTPSurl = url.replace(/^https?:\/\//, '');
+      const host = url.replace(/^https?:\/\//, '');
 
-      dns.lookup(noHTTPSurl, (err) => {
+      dns.lookup(host, (err) => {
 
         if(err){
           return  res.json({ 
@@ -41,10 +41,10 @@ app.post('/api/shorturl', (req, res) => {
           
           });
         }else{
-          short_url++;
+          id++;
           const link = {
             original_url: url,
-            short_url: short_url
+            short_url: id
           }
 
             links.push(link);
@@ -55,11 +55,11 @@ app.post('/api/shorturl', (req, res) => {
 }); 
 });
 
-app.get('/api/shorturl/:short_url', (req, res) => {
+app.get('/api/shorturl/:id', (req, res) => {
 
-  const { short_url } = req.params;
+  const { id } = req.params;
 
-  const link = links.find(lnk => `${lnk.short_url}` === short_url);
+  const link = links.find(lnk => `${lnk.short_url}` === id);
 
     if(link){
       return  res.redirect(link.original_url);
