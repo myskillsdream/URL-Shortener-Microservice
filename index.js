@@ -24,7 +24,7 @@ app.get('/', function(req, res){
 // });
 
   const links = [];
-  let id = 0;
+  let short_url = 0;
 
 app.post('/api/shorturl', (req, res) => {
 
@@ -41,10 +41,10 @@ app.post('/api/shorturl', (req, res) => {
           
           });
         }else{
-          id++;
+          short_url++;
           const link = {
             original_url: url,
-            short_url: id
+            short_url: short_url
           }
 
             links.push(link);
@@ -55,11 +55,11 @@ app.post('/api/shorturl', (req, res) => {
 }); 
 });
 
-app.get('/api/shorturl/:id', (req, res) => {
+app.get('/api/shorturl/:short_url', (req, res) => {
 
-  const { id } = req.params;
+  const { short_url } = req.params;
 
-  const link = links.find(lnk => `${lnk.short_url}` === id);
+  const link = links.find(lnk => `${lnk.short_url}` === short_url);
 
     if(link){
       return  res.redirect(link.original_url);
