@@ -19,9 +19,9 @@ app.get('/', function(req, res){
 });
 
 // Your first API endpoint
-// app.get('/api/hello', function(req, res) {
-//   res.json({ greeting: 'hello API' });
-// });
+app.get('/api/hello', function(req, res) {
+  res.json({ greeting: 'hello API' });
+});
 
   const links = [];
   let short_url = 0;
@@ -30,9 +30,9 @@ app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
-      const host = url.replace(/^https?:\/\//, '');
+      const noHTTPSurl = url.replace(/^https?:\/\//, '');
 
-      dns.lookup(host, (err) => {
+      dns.lookup(noHTTPSurl, (err) => {
 
         if(err){
           return  res.json({ 
