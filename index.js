@@ -23,7 +23,7 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-  // const links = [];
+  const links = [];
   let id = 0;
 
 app.post('/api/shorturl', (req, res) => {
@@ -42,18 +42,14 @@ app.post('/api/shorturl', (req, res) => {
           });
         }else{
           id++;
-          // const link = {
-          //   original_url: url,
-          //   short_url: id
-          // };
+          const link = {
+            original_url: url,
+            short_url: id
+          };
 
-            // links.push(link);
+            links.push(link);
 
-            return res.json({
-              original_url: url,
-              short_url: id
-            });
-
+            return res.json(link);
 
         }
 }); 
@@ -63,9 +59,9 @@ app.get('/api/shorturl/:id', (req, res) => {
 
   const { id } = req.params;
 
-  // const link = links.find(lnk => `${lnk.short_url}` === id);
+  const link = links.find(lnk => `${lnk.short_url}` === id);
 
-    if(id){
+    if(link){
       return  res.redirect(link.original_url);
     }else{
 
