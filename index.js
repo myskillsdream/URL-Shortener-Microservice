@@ -26,7 +26,7 @@ app.get('/', function(req, res){
   const links = [];
   let id = 0;
 
-app.post('/api/shorturl/new', (req, res) => {
+app.post('/api/shorturl', (req, res) => {
 
       let {url} = req.body;
 
