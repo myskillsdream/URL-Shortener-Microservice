@@ -1,106 +1,20 @@
-// require('dotenv').config();
-// const express = require('express');
-// const cors = require('cors');
-// const app = express();
-// const bodyParser = require('body-parser');
+require('dotenv').config();
 
-// const dns = require('dns');
-
-// // Basic Configuration
-// const port = process.env.PORT || 3000;
-
-// app.use(cors());
-
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use('/public', express.static(`${process.cwd()}/public`));
-
-// app.get('/', function(req, res){
-//   res.sendFile(process.cwd() + '/views/index.html');
-// });
-
-// // Your first API endpoint
-// app.get('/api/hello', function(req, res) {
-//   res.json({ greeting: 'hello API' });
-// });
-
-//   const links = [];
-//   let short_url = 0;
-
-// app.post('/api/shorturl', (req, res) => {
-
-//       let {url} = req.body;
-
-//       const host = url.replace(/^https?:\/\//, '');
-
-//       dns.lookup(host, (err) => {
-
-//         if(err || host === ""){
-//           return  res.json({ 
-            
-//             error: 'invalid URL' 
-          
-//           });
-//         }else{
-//           short_url++;
-//           const link = {
-//             original_url: url,
-//             short_url: short_url
-//           }
-
-//             console.log(host)
-
-//             links.push(link);
-
-//             return res.json(link);
-
-//         }
-// }); 
-// });
-
-// app.get('/api/shorturl/:short_url', (req, res) => {
-
-//   const { short_url } = req.params;
-
-//   const link = links.find(lnk => `${lnk.short_url}` === short_url);
-
-//     if(link){
-//       return  res.redirect(link.original_url);
-//     }else{
-
-//       return res.json({
-//         error: "no short url"
-//       });
-
-
-//     }
-// }); 
-
-
-// app.listen(port, function() {
-//   console.log(`Listening on port ${port}`);
-// });
-
-
-'use strict';
-
-var express = require('express');
-var mongo = require('mongodb');
+const express = require('express');
 const mongoose = require('mongoose');
 
-var cors = require('cors');
+const cors = require('cors');
 
-var app = express();
+const app = express();
 
 // Basic Configuration 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 
 require('mongodb');
 
 app.use(cors());
 
-/** this project needs to parse POST bodies **/
-// you should mount the body-parser here
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
@@ -121,11 +35,6 @@ app.listen(port, function () {
 
 
 /* Database Connection */
-
-// mongoose.set('useNewUrlParser', true);
-// mongoose.set('useFindAndModify', false);
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useUnifiedTopology', true);
 
 let uri = 'mongodb+srv://myskillsdream:' + process.env.PW + '@cluster0.kuhcl.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('Connect to MongoDB..'))
